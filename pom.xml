@@ -10,13 +10,13 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
+    <name>company-database</name>
+    <description>Avb test application</description>
+
     <groupId>com.avbinvest</groupId>
     <artifactId>company-database</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
-
-    <name>Company Database</name>
-    <description>Avb test application</description>
 
     <modules>
         <module>infra</module>
