@@ -1,0 +1,44 @@
+server:
+  port: 8080
+spring:
+  cloud:
+    gateway:
+      discovery.locator.enabled: true
+      routes:
+        # Компании
+        - id: companies_all
+          uri: lb://company-service
+          predicates:
+            - Path=/api/companies/** #TODO Поправь после контроллеров
+          filters:
+            - CircuitBreaker=mainCircuit
+
+        # Пользователи
+        - id: users_all
+          uri: lb://user-service
+          predicates:
+            - Path=/api/users/** #TODO Поправь после контроллеров
+          filters:
+            - CircuitBreaker=mainCircuit
+
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      slidingWindowSize: 10
+      failureRateThreshold: 50
+      waitDurationInOpenState: 10000
+      permittedNumberOfCallsInHalfOpenState: 3
+      minimumNumberOfCalls: 5
+      automaticTransitionFromOpenToHalfOpenEnabled: true
+      slidingWindowType: COUNT_BASED
+
+  instances:
+    mainCircuit:
+      baseConfig: default
+
+logging:
+  level:
+    root: INFO
+    org.springframework.cloud.gateway: INFO
+    reactor.netty.http.client: WARN
+    ru.practicum.gateway: DEBUG
