@@ -49,3 +49,24 @@ logging:
     org.springframework.transaction: DEBUG
     org.springframework.transaction.interceptor: DEBUG
     org.springframework.orm.jpa.JpaTransactionManager: INFO
+
+# Общая настройка для Feign Circuit Breaker
+feign:
+  circuitbreaker:
+    enabled: true
+
+# Resilience4j Circuit Breaker конфигурация
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        sliding-window-size: 50
+        failure-rate-threshold: 50
+    instances:
+      company-service:
+        sliding-window-size: 30
+        wait-duration-in-open-state: 10000
+        permitted-number-of-calls-in-half-open-state: 3
+        sliding-window-type: COUNT_BASED
+        minimum-number-of-calls: 7
+        automatic-transition-from-open-to-half-open-enabled: true

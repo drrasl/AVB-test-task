@@ -6,3 +6,7 @@ CREATE TABLE IF NOT EXISTS users (
     phone_number VARCHAR(20) NOT NULL,
     company_id BIGINT NOT NULL
 );
+
+-- Уникальный индекс на комбинацию полей - Проверка на дубликат на уровне БД
+CREATE UNIQUE INDEX IF NOT EXISTS idx_unique_user
+    ON users(first_name, last_name, phone_number);
