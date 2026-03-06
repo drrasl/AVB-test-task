@@ -6,8 +6,8 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 
 @SpringBootApplication
 @ConfigurationPropertiesScan
-public class CompanyService {
+public class CompanyServiceApp {
     public static void main(String[] args) {
-        SpringApplication.run(CompanyService.class, args);
+        SpringApplication.run(CompanyServiceApp.class, args);
     }
 }

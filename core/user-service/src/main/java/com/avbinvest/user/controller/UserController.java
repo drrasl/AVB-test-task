@@ -47,11 +47,9 @@ public class UserController {
         service.deleteUser(userId);
     }
 
-    //Возвращение пользователя по его id
     @GetMapping("/{id}")
     public UserDto getUser(@PathVariable("id") Long userId) {
         log.debug("Controller: Request to get user with id: {} received", userId);
         return service.getUserById(userId);
     }
-
 }

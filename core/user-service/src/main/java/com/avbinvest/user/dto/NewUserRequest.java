@@ -14,19 +14,19 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class NewUserRequest {
 
-    @NotBlank(message = "Имя пользователя не может быть пустым")
-    @Size(min = 3, max = 250, message = "Имя должно содержать от 3 до 250 символов")
+    @NotBlank(message = "The user name cannot be empty.")
+    @Size(min = 3, max = 250, message = "The name must contain from 3 to 250 characters.")
     private String firstName;
 
-    @NotBlank(message = "Фамилия пользователя не может быть пустой")
-    @Size(min = 3, max = 250, message = "Фамилия должна содержать от 3 до 250 символов")
+    @NotBlank(message = "The user's last name cannot be empty.")
+    @Size(min = 3, max = 250, message = "The last name must contain from 3 to 250 characters.")
     private String lastName;
 
-    @NotBlank(message = "Телефон не может быть пустым")
-    @Size(min = 1, max = 20, message = "Телефон должен содержать от 1 до 20 символов")
+    @NotBlank(message = "The phone can't be empty")
+    @Size(min = 1, max = 20, message = "The phone number must contain from 1 to 20 characters.")
     private String phone;
 
-    @NotBlank(message = "Айди компании не может быть пустым")
+    @NotBlank(message = "The company's ID cannot be empty")
     @Positive
     private Long companyId;
 }

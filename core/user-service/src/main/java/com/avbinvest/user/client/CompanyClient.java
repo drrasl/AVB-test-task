@@ -10,7 +10,6 @@ import java.util.List;
 
 @FeignClient(name = "company-service", fallback = CompanyServiceClientFallback.class)
 public interface CompanyClient {
-    //TODO доработать после сервиса компании
 
     @GetMapping("/internal/company/{companyId}")
     CompanyShortDto getCompanyById(@PathVariable("companyId") Long companyId);

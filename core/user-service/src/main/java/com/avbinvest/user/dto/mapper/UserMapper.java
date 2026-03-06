@@ -27,6 +27,16 @@ public class UserMapper {
                 .lastName(user.getLastName())
                 .phone(user.getPhone())
                 .build();
-        //CompanyDto will be filled separately in service
+        //CompanyShortDto will be filled separately in service
+    }
+
+    public static UserShortDto toUserShortDto(User user) {
+        return UserShortDto.builder()
+                .id(user.getId())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .phone(user.getPhone())
+                .companyId(user.getCompanyId())
+                .build();
     }
 }
