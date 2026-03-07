@@ -44,7 +44,7 @@ spring:
 logging:
   level:
     root: INFO
-    ru.practicum.user.service: TRACE
+    com.avbinvest.company.service: TRACE
     org.springframework.orm.jpa: DEBUG
     org.springframework.transaction: DEBUG
     org.springframework.transaction.interceptor: DEBUG
@@ -52,6 +52,14 @@ logging:
 
 # Общая настройка для Feign Circuit Breaker
 feign:
+  client:
+    config:
+      default:
+        connectTimeout: 10000
+        readTimeout: 30000
+      user-service:
+        connectTimeout: 10000
+        readTimeout: 30000
   circuitbreaker:
     enabled: true
 

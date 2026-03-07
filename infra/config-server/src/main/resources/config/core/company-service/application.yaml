@@ -33,8 +33,8 @@ spring:
 
 logging:
   level:
-    ru:
-      practicum: TRACE
+    com:
+      avbinvest: TRACE
     org:
       springframework:
         orm:
@@ -44,6 +44,14 @@ logging:
 
 # Общая настройка для Feign Circuit Breaker
 feign:
+  client:
+    config:
+      default:
+        connectTimeout: 10000
+        readTimeout: 30000
+      user-service:
+        connectTimeout: 10000
+        readTimeout: 30000
   circuitbreaker:
     enabled: true
 

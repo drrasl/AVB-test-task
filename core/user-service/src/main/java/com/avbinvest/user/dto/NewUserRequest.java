@@ -1,6 +1,7 @@
 package com.avbinvest.user.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -26,7 +27,7 @@ public class NewUserRequest {
     @Size(min = 1, max = 20, message = "The phone number must contain from 1 to 20 characters.")
     private String phone;
 
-    @NotBlank(message = "The company's ID cannot be empty")
+    @NotNull
     @Positive
     private Long companyId;
 }

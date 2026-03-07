@@ -3,7 +3,10 @@ server:
 spring:
   cloud:
     gateway:
-      discovery.locator.enabled: true
+      httpclient:
+        connect-timeout: 30000      # 30 секунд
+        response-timeout: 60s       # 60 секунд на ответ
+      discovery.locator.enabled: false # Отключили автомаршруты
       routes:
         # Компании
         - id: companies_all
@@ -41,4 +44,4 @@ logging:
     root: INFO
     org.springframework.cloud.gateway: INFO
     reactor.netty.http.client: WARN
-    ru.practicum.gateway: DEBUG
+    com.avbinvest.infra.gateway: DEBUG
