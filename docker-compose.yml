@@ -1,3 +1,5 @@
+name: avb-invest-test
+
 services:
 
   company-db:
@@ -70,7 +72,7 @@ services:
     ports:
       - "8888:8888"  # Фиксированный порт для Config Server
     environment:
-      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_PROFILES_ACTIVE=native,docker
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery-server:8761/eureka/
     depends_on:
       discovery-server:
@@ -123,11 +125,11 @@ services:
     networks:
       - microservices-network
 
-  api-gateway:
+  gateway-server:
     build:
-      context: ./infra/api-gateway
+      context: ./infra/gateway-server
       dockerfile: Dockerfile
-    container_name: api-gateway
+    container_name: gateway-server
     ports:
       - "8080:8080"
     environment:

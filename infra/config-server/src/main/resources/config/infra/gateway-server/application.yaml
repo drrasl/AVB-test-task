@@ -9,7 +9,7 @@ spring:
         - id: companies_all
           uri: lb://company-service
           predicates:
-            - Path=/api/companies/** #TODO Поправь после контроллеров
+            - Path=/companies/**
           filters:
             - CircuitBreaker=mainCircuit
 
@@ -17,7 +17,7 @@ spring:
         - id: users_all
           uri: lb://user-service
           predicates:
-            - Path=/api/users/** #TODO Поправь после контроллеров
+            - Path=/users/**
           filters:
             - CircuitBreaker=mainCircuit
 
