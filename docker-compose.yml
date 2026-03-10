@@ -54,8 +54,6 @@ services:
     container_name: discovery-server
     ports:
       - "8761:8761"
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
     networks:
       - microservices-network
     healthcheck:
@@ -72,7 +70,7 @@ services:
     ports:
       - "8888:8888"  # Фиксированный порт для Config Server
     environment:
-      - SPRING_PROFILES_ACTIVE=native,docker
+      - SPRING_PROFILES_ACTIVE=native
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery-server:8761/eureka/
     depends_on:
       discovery-server:
@@ -91,7 +89,6 @@ services:
       dockerfile: Dockerfile
     container_name: user-service
     environment:
-      - SPRING_PROFILES_ACTIVE=docker
       - CONFIG_SERVER_URL=http://config-server:8888
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery-server:8761/eureka/
       - SPRING_DATASOURCE_URL=jdbc:postgresql://company-db:5432/core_user_service
@@ -111,7 +108,6 @@ services:
       dockerfile: Dockerfile
     container_name: company-service
     environment:
-      - SPRING_PROFILES_ACTIVE=docker
       - CONFIG_SERVER_URL=http://config-server:8888
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery-server:8761/eureka/
       - SPRING_DATASOURCE_URL=jdbc:postgresql://company-db:5432/core_company_service
@@ -133,7 +129,6 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - SPRING_PROFILES_ACTIVE=docker
       - CONFIG_SERVER_URL=http://config-server:8888
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery-server:8761/eureka/
     depends_on:
