@@ -1,0 +1,48 @@
+server:
+  port: 8080
+spring:
+  cloud:
+    gateway:
+      httpclient:
+        connect-timeout: 30000      # 30 секунд
+        response-timeout: 120s
+      discovery.locator.enabled: false # Отключили автомаршруты
+      routes:
+        # Компании
+        - id: companies_all
+          uri: lb://company-service
+          predicates:
+            - Path=/companies/**
+          filters:
+            #- CircuitBreaker=mainCircuit
+
+        # Пользователи
+        - id: users_all
+          uri: lb://user-service
+          predicates:
+            - Path=/users/**
+          filters:
+            #- CircuitBreaker=mainCircuit
+
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      slidingWindowSize: 10
+      failureRateThreshold: 50
+      waitDurationInOpenState: 20000
+      permittedNumberOfCallsInHalfOpenState: 3
+      minimumNumberOfCalls: 3
+      automaticTransitionFromOpenToHalfOpenEnabled: true
+      slidingWindowType: COUNT_BASED
+      timeoutDuration: 120s  # Должен быть >= response-timeout Gateway
+
+  instances:
+    mainCircuit:
+      baseConfig: default
+
+logging:
+  level:
+    root: INFO
+    org.springframework.cloud.gateway: INFO
+    reactor.netty.http.client: WARN
+    com.avbinvest.infra.gateway: DEBUG
