@@ -5,7 +5,7 @@ spring:
     gateway:
       httpclient:
         connect-timeout: 30000      # 30 секунд
-        response-timeout: 60s       # 60 секунд на ответ
+        response-timeout: 120s
       discovery.locator.enabled: false # Отключили автомаршруты
       routes:
         # Компании
