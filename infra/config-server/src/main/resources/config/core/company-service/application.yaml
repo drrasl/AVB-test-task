@@ -34,12 +34,14 @@ spring:
 logging:
   level:
     com:
-      avbinvest: TRACE
+      avbinvest: DEBUG
+    feign: DEBUG
     org:
       springframework:
         orm:
           jpa: DEBUG
         transaction: DEBUG
+        cloud.openfeign: DEBUG
   root: INFO
 
 # Общая настройка для Feign Circuit Breaker

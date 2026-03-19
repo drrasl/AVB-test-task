@@ -14,7 +14,7 @@ spring:
           predicates:
             - Path=/companies/**
           filters:
-            - CircuitBreaker=mainCircuit
+            #- CircuitBreaker=mainCircuit
 
         # Пользователи
         - id: users_all
@@ -22,18 +22,19 @@ spring:
           predicates:
             - Path=/users/**
           filters:
-            - CircuitBreaker=mainCircuit
+            #- CircuitBreaker=mainCircuit
 
 resilience4j.circuitbreaker:
   configs:
     default:
       slidingWindowSize: 10
       failureRateThreshold: 50
-      waitDurationInOpenState: 10000
+      waitDurationInOpenState: 20000
       permittedNumberOfCallsInHalfOpenState: 3
-      minimumNumberOfCalls: 5
+      minimumNumberOfCalls: 3
       automaticTransitionFromOpenToHalfOpenEnabled: true
       slidingWindowType: COUNT_BASED
+      timeoutDuration: 120s  # Должен быть >= response-timeout Gateway
 
   instances:
     mainCircuit:

@@ -313,21 +313,4 @@ docker compose logs -f --tail 100 user-service
 # С временными метками
 docker compose logs -ft gateway-server
 ```
-
-
-### 🔹 ЕСЛИ 504 Gateway Timeout
-
-```bash
-# Увеличить таймауты в gateway-server/application.yml:
-spring:
-  cloud:
-    gateway:
-      httpclient:
-        response-timeout: 120s
-
-# Проверить, что сервисы зарегистрированы в Eureka
-# http://localhost:8761
-
-# Временно отключить CircuitBreaker для отладки
-```
 ---
